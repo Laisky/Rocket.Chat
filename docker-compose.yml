@@ -6,7 +6,7 @@ rocketchat:
     - PORT=3000
     - ROOT_URL=http://chat.laisky.com/
     - MONGO_URL=mongodb://mongo:27016/rocketchat
-  links:
+  external_links:
     - mongo32:mongo
   ports:
     - 27300:3000
