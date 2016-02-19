@@ -1,5 +1,8 @@
 rocketchat:
   image: rocketchat/rocket.chat:latest
+  log_driver: syslog
+  log_opt:
+    tag: rocket-chat
   volumes:
      - /var/lib/rocketchat/data/uploads:/app/uploads
   environment:
@@ -13,6 +16,9 @@ rocketchat:
 
 hubot:
   image: rocketchat/hubot-rocketchat
+  log_driver: syslog
+  log_opt:
+    tag: rocket-hubot
   environment:
     - ROCKETCHAT_ROOM=''
     - LISTEN_ON_ALL_PUBLIC=true
