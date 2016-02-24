@@ -42,3 +42,8 @@ services:
       - rocketchat:rocketchat
     ports:
       - 27301:3001
+
+networks:
+  default:
+    external:
+      name: docker_default
