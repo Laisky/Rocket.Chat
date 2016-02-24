@@ -1,38 +1,44 @@
-rocketchat:
-  image: rocketchat/rocket.chat:latest
-  container_name: rocketchat
-  log_driver: syslog
-  log_opt:
-    tag: rocketchat
-  volumes:
-    - /var/lib/rocketchat/data/uploads:/app/uploads
-  environment:
-    - PORT=3000
-    - ROOT_URL=http://chat.laisky.com/
-    - MONGO_URL=mongodb://mongodb:27017/rocketchat
-  external_links:
-    - mongodb:mongodb
-  expose:
-    - "3000"
-  ports:
-    - 27300:3000
+version: "2"
+services:
+  rocketchat:
+    image: rocketchat/rocket.chat
+    container_name: rocketchat
+    logging:
+      driver: syslog
+      options:
+        syslog-facility: local6
+        tag: rocketchat
+    volumes:
+      - /var/lib/rocketchat/data/uploads:/app/uploads
+    environment:
+      - PORT=3000
+      - ROOT_URL=http://chat.laisky.com/
+      - MONGO_URL=mongodb://mongodb:27017/rocketchat
+    external_links:
+      - mongodb:mongodb
+    expose:
+      - "3000"
+    ports:
+      - 27300:3000
 
-hubot:
-  image: rocketchat/hubot-rocketchat
-  container_name: hubot
-  log_driver: syslog
-  log_opt:
-    tag: rocket-hubot
-  environment:
-    - ROCKETCHAT_ROOM=''
-    - LISTEN_ON_ALL_PUBLIC=true
-    - ROCKETCHAT_USER=bot
-    - ROCKETCHAT_PASSWORD=bot
-    - ROCKETCHAT_AUTH=password
-    - ROCKETCHAT_URL=http://rocketchat:3000
-    - BOT_NAME=bot
-    - EXTERNAL_SCRIPTS=hubot-help,hubot-seen,hubot-links,hubot-diagnostics
-  links:
-    - rocketchat:rocketchat
-  ports:
-    - 27301:3001
+  hubot:
+    image: rocketchat/hubot-rocketchat
+    container_name: hubot
+    logging:
+      driver: syslog
+      options:
+        syslog-facility: local6
+        tag: rocket-hubot
+    environment:
+      - ROCKETCHAT_ROOM=''
+      - LISTEN_ON_ALL_PUBLIC=true
+      - ROCKETCHAT_USER=bot
+      - ROCKETCHAT_PASSWORD=bot
+      - ROCKETCHAT_AUTH=password
+      - ROCKETCHAT_URL=http://rocketchat:3000
+      - BOT_NAME=bot
+      - EXTERNAL_SCRIPTS=hubot-help,hubot-seen,hubot-links,hubot-diagnostics
+    links:
+      - rocketchat:rocketchat
+    ports:
+      - 27301:3001
