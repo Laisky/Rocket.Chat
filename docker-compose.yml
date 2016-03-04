@@ -2,7 +2,7 @@ version: "2"
 services:
   rocketchat:
     image: rocketchat/rocket.chat
-    container_name: rocketchat
+    restart: always
     logging:
       driver: syslog
       options:
@@ -23,7 +23,7 @@ services:
 
   hubot:
     image: rocketchat/hubot-rocketchat
-    container_name: hubot
+    restart: always
     logging:
       driver: syslog
       options:
