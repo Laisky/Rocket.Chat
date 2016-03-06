@@ -46,4 +46,4 @@ services:
 networks:
   default:
     external:
-      name: docker_default
+      name: docker_gargantua
