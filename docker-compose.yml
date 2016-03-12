@@ -4,10 +4,9 @@ services:
     image: rocketchat/rocket.chat
     restart: always
     logging:
-      driver: syslog
+      driver: fluentd
       options:
-        syslog-facility: local6
-        tag: rocketchat
+        fluentd-address: "localhost:24224"
     volumes:
       - /var/lib/rocketchat/data/uploads:/app/uploads
     environment:
@@ -25,10 +24,9 @@ services:
     image: rocketchat/hubot-rocketchat
     restart: always
     logging:
-      driver: syslog
+      driver: fluentd
       options:
-        syslog-facility: local6
-        tag: rocket-hubot
+        fluentd-address: "localhost:24224"
     environment:
       - ROCKETCHAT_ROOM=''
       - LISTEN_ON_ALL_PUBLIC=true
