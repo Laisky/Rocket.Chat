@@ -1,7 +1,7 @@
 version: "2"
 services:
   rocketchat:
-    image: rocketchat/rocket.chat
+    image: rocket.chat
     restart: always
     logging:
       driver: fluentd
